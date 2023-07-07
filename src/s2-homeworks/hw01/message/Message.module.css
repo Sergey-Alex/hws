@@ -1,0 +1,38 @@
+.message {
+    width: 30%;
+    height: 60px;
+    flex-shrink: 0;
+    background-color: #F5F7FB;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: flex-start;
+}
+
+.imageAndText {
+
+}
+
+.imageAndText img {
+
+}
+
+.text {
+
+}
+
+.text:after {
+
+}
+
+.name {
+
+}
+
+.messageText {
+
+}
+
+.time {
+
+}
