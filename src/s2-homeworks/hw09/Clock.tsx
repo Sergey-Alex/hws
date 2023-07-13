@@ -29,23 +29,12 @@ function Clock() {
     const onMouseLeave = () => { // пишут студенты // спрятать дату если мышка не наведена
         setShow(false)
     }
-    type timeType = "2-digit" | "numeric" | "long" | "short" | "narrow" | undefined
+    const stringTime = date.toLocaleTimeString('ru-RU') || <br/> // часы24:минуты:секунды (01:02:03)/(23:02:03)/(24:00:00)/(00:00:01) // пишут студенты
+    const stringDate = date.toLocaleDateString('ru-RU') || <br/> // день.месяц.год (01.02.2022) // пишут студенты, варианты 01.02.0123/01.02.-123/01.02.12345 не рассматриваем
 
-    const optionsTime: {} = {hour: '2-digit', minute: '2-digit', second: '2-digit'};
-
-    const stringTime = new Intl.DateTimeFormat('en-GB', optionsTime).format(date);
-
-    const optionsDate: {} = {day: '2-digit', month: '2-digit', year: 'numeric'};
-
-    const stringDate = new Intl.DateTimeFormat('en-GB', optionsDate).format(date);
-
-    const optionsDay: {weekday: "long" | "short" | "narrow" | undefined} = {weekday: 'long'};
-
-    const stringDay  = new Intl.DateTimeFormat('en-US', optionsDay).format(date);
-
-    const optionsMonth: { month: timeType } = {month: 'long'};
-
-    const stringMonth = new Intl.DateTimeFormat('en-US', optionsMonth).format(date);
+    // день недели на английском, месяц на английском (https://learn.javascript.ru/intl#intl-datetimeformat)
+    const stringDay = date.toLocaleString('en-US', {weekday: 'long'}) || <br/> // пишут студенты
+    const stringMonth = date.toLocaleString('en-US', {month: 'long'}) || <br/> // пишут студенты
 
     // const stringTime =  || <br/> // часы24:минуты:секунды (01:02:03)/(23:02:03)/(24:00:00)/(00:00:01) // пишут студенты
     // const stringDate = 'date->date' || <br/> // день.месяц.год (01.02.2022) // пишут студенты, варианты 01.02.0123/01.02.-123/01.02.12345 не рассматриваем
