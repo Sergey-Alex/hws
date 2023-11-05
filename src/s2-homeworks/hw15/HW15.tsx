@@ -52,7 +52,7 @@ const HW15 = () => {
         getTechs(params)
             .then((res: any) => {
                 // делает студент
-                if (res){
+                if (res) {
                     setTechs(res.data.techs)
                     setTotalCount(res.data.totalCount)
                 }
@@ -67,8 +67,12 @@ const HW15 = () => {
 
         setPage(newPage)
         setCount(newCount)
-        sendQuery({sort, page:newPage, count: newCount})
-        setSearchParams(JSON.stringify({sort, page:newPage, count: newCount}))
+        const pageQueries: { page?: string } = newPage !== 1 ? {page: newPage + ''} : {}
+        const countQueries: { count?: string } = newCount !== 4 ? {count: newCount + ''} : {}
+        const {page, count, ...restQueries} = Object.fromEntries(searchParams)
+        const allQueries = {...restQueries, ...pageQueries, ...countQueries}
+        sendQuery(allQueries)
+        setSearchParams(allQueries)
         // sendQuery(
         // setSearchParams(
 
@@ -78,10 +82,16 @@ const HW15 = () => {
     const onChangeSort = (newSort: string) => {
         // делает студент
 
-       setSort(newSort)
+        setSort(newSort)
         setPage(1) // при сортировке сбрасывать на 1 страницу
-        sendQuery({sort: newSort, page: 1, count})
-        setSearchParams(JSON.stringify({sort: newSort, page:1, count}))
+        const sortQuery: { sort?: string } = newSort !== '' ? {sort: newSort} : {}
+        const {sort, page, ...requestQueries} = Object.fromEntries(searchParams)
+        const allQuery = {...sortQuery, ...requestQueries}
+        sendQuery(allQuery)
+        setSearchParams(allQuery)
+
+        // sendQuery({sort: newSort, page: 1, count})
+        // setSearchParams(JSON.stringify({sort: newSort, page:1, count}))
         // sendQuery(
         // setSearchParams(
 
